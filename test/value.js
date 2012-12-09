@@ -27,4 +27,10 @@ module.exports['model'] = function(beforeExit, assert){
 	assert.equal(first, 3);
 	assert.equal(second, 4);
 
+	model.first.set(5);
+	assert.equal(first, 5);
+
+	model.second.set(6);
+	assert.equal(second, 6);
+
 };
