@@ -1,15 +1,22 @@
 {
     "name":	"la"
     , "description":	"lazy-async loader"
-    , "version":	"0.1.0"
+    , "version":	"0.2.0"
     , "author":	"Elmer Bulthuis <elmerbulthuis@gmail.com>"
     , "repositories":	[{
         "type": "git",
         "url": "git@github.com:elmerbulthuis/la.git"
     }]
+
     , "main": "index.js"
+    , "scripts": {
+        "test": "expresso test/*"
+    }
+    
     ,   "dependencies":	{
 	}
     ,   "devDependencies":	{
+        "expresso": "*"
 	}
+
 }
