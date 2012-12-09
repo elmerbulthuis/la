@@ -62,3 +62,26 @@ module.exports['sum async 2'] = function(beforeExit, assert){
 
 
 
+module.exports['sum async 3'] = function(beforeExit, assert){
+	var first = la(1);
+	var second = la(2);
+
+	second = la(second, function(second, cb){
+		setTimeout(function(){
+			cb(null, second);
+		}, 1000);
+	});
+	var third = la(first, second, function(first, second, cb){
+		cb(null, first + second);
+	});
+
+	third.get(function(err, value){
+		assert.equal(err, la.CancelException);
+	});
+
+	first.set(5);
+
+}
+
+
+
