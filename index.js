@@ -42,15 +42,15 @@ la by "Elmer Bulthuis" <elmerbulthuis@gmail.com>
 
 	function _define(){
 
-		LazyAsync.CancelException = CancelException;
+		_la.CancelException = CancelException;
 
-		return LazyAsync;
+		return _la;
 
 
 /* * * * * * * * * * * * * * * * * * */
 
 
-function LazyAsync(){
+function _la(){
 	var la = {};
 
 
