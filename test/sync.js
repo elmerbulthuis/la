@@ -1,5 +1,7 @@
 var la = require('la');
 
+
+
 module.exports['sum sync'] = function(beforeExit, assert){
 	var one = la(1);
 	var two = la(2);

@@ -1,6 +1,7 @@
 var la = require('la');
 
 
+
 module.exports['sum async'] = function(beforeExit, assert){
 	var one = la(1);
 	var two = la(2);
@@ -16,6 +17,7 @@ module.exports['sum async'] = function(beforeExit, assert){
 	});
 
 }
+
 
 
 module.exports['sum async 2'] = function(beforeExit, assert){
