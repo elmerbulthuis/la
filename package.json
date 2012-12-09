@@ -7,9 +7,16 @@
         "type": "git",
         "url": "git@github.com:elmerbulthuis/la.git"
     }]
+
     , "main": "index.js"
+    , "scripts": {
+        "test": "expresso test/*"
+    }
+    
     ,   "dependencies":	{
 	}
     ,   "devDependencies":	{
+        "expresso": "*"
 	}
+
 }
