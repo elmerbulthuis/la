@@ -1,0 +1,15 @@
+{
+    "name":	"la"
+    , "description":	"lazy-async loader"
+    , "version":	"0.0.0"
+    , "author":	"Elmer Bulthuis <elmerbulthuis@gmail.com>"
+    , "repositories":	[{
+        "type": "git",
+        "url": "git@github.com:elmerbulthuis/la.git"
+    }]
+    , "main": "index.js"
+    ,   "dependencies":	{
+	}
+    ,   "devDependencies":	{
+	}
+}
