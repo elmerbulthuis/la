@@ -1,19 +1,5 @@
 var la = require('la');
 
-module.exports['sum sync'] = function(beforeExit, assert){
-	var one = la(1);
-	var two = la(2);
-	var sum = la(one, two, function(one, two, cb){
-		cb(null, one + two);
-	});
-
-	sum.get(function(err, value){
-		assert.ifError(err);
-		assert.equal(value, 3);
-	});
-
-}
-
 
 module.exports['sum async'] = function(beforeExit, assert){
 	var one = la(1);
