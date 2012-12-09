@@ -8,13 +8,17 @@ module.exports['model'] = function(beforeExit, assert){
 		, second: la(2)
 	};
 
+	var firstCount = 0;
+	var secondCount = 0;
 	var first;
 	var second;
 
 	model.first.onValue(function(err, value){
+		firstCount++;
 		first = value;
 	});
 	model.second.onValue(function(err, value){
+		secondCount++;
 		second = value;
 	});
 
@@ -32,5 +36,18 @@ module.exports['model'] = function(beforeExit, assert){
 
 	model.second.set(6);
 	assert.equal(second, 6);
+
+	assert.equal(firstCount, 3);
+	assert.equal(secondCount, 3);
+
+
+	model.first.set(5);
+	model.second.set(5);
+
+	assert.equal(firstCount, 3);
+	assert.equal(secondCount, 4);
+
+	assert.equal(first, 5);
+	assert.equal(second, 5);
 
 };
