@@ -1,0 +1,92 @@
+<html>
+<head>
+
+<title>maps</title>
+<script type="text/javascript" src="../lib/la.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+</head>
+
+<body>
+
+<form id="search">
+<input type="text" class="search" autocomplete="off" />
+<input type="text" class="search" autocomplete="off" />
+<input type="text" class="search" autocomplete="off" />
+</form>
+
+
+<ul id="found">
+</ul>
+
+<script type="text/javascript">
+	var geocoder = new google.maps.Geocoder();
+	var timeoutHandle = 0;
+
+	var search = la('');
+	function search_get(err, value){
+		if(err === la.CancelException) return;
+		if(err) throw err;
+
+		var searchElement = document.getElementById('search');
+		var elements = searchElement.elements;
+		var elementCount = elements.length;
+		for(var elementIndex = 0; elementIndex < elementCount; elementIndex++){
+			var element = elements[elementIndex];
+			element.value = value;
+		}
+	};
+	search.bind(search_get)
+
+
+
+	var found = la(search, function(search, cb){
+		timeoutHandle = setTimeout(function(){
+			geocoder.geocode({
+				address: search	
+			}, function(results, status){
+				cb(null, results)
+			});		
+		}, 1000);
+	});
+	function found_get(err, value){
+		if(err === la.CancelException) {
+			clearTimeout(timeoutHandle);
+			return;
+		}
+		if(err) throw err;
+
+		var foundElement = document.getElementById('found');
+		while(foundElement.firstChild) foundElement.removeChild(foundElement.firstChild);
+		
+		value
+		&& value
+		.map(function(item){
+			var itemElement = document.createElement('li');
+			itemElement.appendChild(document.createTextNode(item.formatted_address));
+			return itemElement
+		})
+		.forEach(function(element){
+			foundElement.appendChild(element);
+		})
+		;
+	};
+	found.bind(found_get);
+
+
+
+
+	document.addEventListener('keyup', function(e){
+
+		if(e.target.className == 'search'){
+			search.set(e.target.value);
+		}
+
+	}, false);
+	
+
+</script>
+
+
+</body>
+</html>
