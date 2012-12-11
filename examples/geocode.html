@@ -23,7 +23,7 @@
 	var search = la('');
 	
 
-	search.onValue(function(err, value){
+	search.bind(function(err, value){
 		if(err) throw err;
 
 		var searchElement = document.getElementById('search');
