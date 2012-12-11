@@ -1,5 +1,7 @@
 var la = require('la');
 var assert = require('assert');
+var eql = assert.deepEqual;
+
 
 module.exports['sequence1'] = sequence1Runner(-1);
 module.exports['sequence1i'] = sequence1Runner(10);
@@ -11,7 +13,6 @@ module.exports['sequence3i'] = sequence3Runner(10);
 module.exports['sequence4'] = sequence4Runner();
 
 
-
 function sequence1Runner(interval){
 	var firstLa = la(1);
 	var firstCounters = getCounters(firstLa);
@@ -19,7 +20,7 @@ function sequence1Runner(interval){
 	var sequence = [
 
 		function(){
-			assert.deepEqual(firstCounters, [0, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 0, 0]);
 		}
 		
 		, function(){
@@ -27,7 +28,7 @@ function sequence1Runner(interval){
 		}
 
 		, function(){
-			assert.deepEqual(firstCounters, [0, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 0, 0]);
 		}
 
 		, function(){
@@ -35,7 +36,7 @@ function sequence1Runner(interval){
 		}
 
 		, function(){
-			assert.deepEqual(firstCounters, [0, 0, 1, 1]);
+			eql(firstCounters, [0, 0, 1, 1]);
 		}
 
 		, function(){
@@ -43,7 +44,7 @@ function sequence1Runner(interval){
 		}
 
 		, function(){
-			assert.deepEqual(firstCounters, [0, 0, 1, 1]);
+			eql(firstCounters, [0, 0, 1, 1]);
 		}
 
 		, function(){
@@ -51,7 +52,7 @@ function sequence1Runner(interval){
 		}
 
 		, function(){
-			assert.deepEqual(firstCounters, [0, 0, 2, 2]);
+			eql(firstCounters, [0, 0, 2, 2]);
 		}
 
 	];
@@ -77,8 +78,8 @@ function sequence2Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 1, 1]);
-			assert.eql(secondCounters, [0, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 1, 1]);
+			eql(secondCounters, [0, 0, 0, 0]);
 		}
 
 		, function(){
@@ -86,8 +87,8 @@ function sequence2Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 1, 1]);
-			assert.eql(secondCounters, [1, 1, 0, 1]);
+			eql(firstCounters, [0, 0, 1, 1]);
+			eql(secondCounters, [1, 1, 0, 1]);
 		}
 
 		, function(){
@@ -95,8 +96,8 @@ function sequence2Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 2, 2]);
-			assert.eql(secondCounters, [1, 1, 1, 1]);
+			eql(firstCounters, [0, 0, 2, 2]);
+			eql(secondCounters, [1, 1, 1, 1]);
 		}
 
 		, function(){
@@ -104,8 +105,8 @@ function sequence2Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 3, 3]);
-			assert.eql(secondCounters, [1, 1, 1, 1]);
+			eql(firstCounters, [0, 0, 3, 3]);
+			eql(secondCounters, [1, 1, 1, 1]);
 		}
 
 		, function(){
@@ -113,8 +114,8 @@ function sequence2Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 3, 3]);
-			assert.eql(secondCounters, [2, 2, 1, 2]);
+			eql(firstCounters, [0, 0, 3, 3]);
+			eql(secondCounters, [2, 2, 1, 2]);
 		}
 
 	];
@@ -146,9 +147,9 @@ function sequence3Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 1, 1]);
-			assert.eql(secondCounters, [0, 0, 0, 0]);
-			assert.eql(thirdCounters, [0, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 1, 1]);
+			eql(secondCounters, [0, 0, 0, 0]);
+			eql(thirdCounters, [0, 0, 0, 0]);
 		}
 
 		, function(){
@@ -156,9 +157,9 @@ function sequence3Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 1, 1]);
-			assert.eql(secondCounters, [1, 1, 0, 1]);
-			assert.eql(thirdCounters, [0, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 1, 1]);
+			eql(secondCounters, [1, 1, 0, 1]);
+			eql(thirdCounters, [0, 0, 0, 0]);
 		}
 
 		, function(){
@@ -166,9 +167,9 @@ function sequence3Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 2, 2]);
-			assert.eql(secondCounters, [1, 1, 1, 1]);
-			assert.eql(thirdCounters, [0, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 2, 2]);
+			eql(secondCounters, [1, 1, 1, 1]);
+			eql(thirdCounters, [0, 0, 0, 0]);
 		}
 
 
@@ -177,9 +178,9 @@ function sequence3Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 2, 2]);
-			assert.eql(secondCounters, [2, 2, 1, 2]);
-			assert.eql(thirdCounters, [1, 1, 0, 1]);
+			eql(firstCounters, [0, 0, 2, 2]);
+			eql(secondCounters, [2, 2, 1, 2]);
+			eql(thirdCounters, [1, 1, 0, 1]);
 		}
 
 		, function(){
@@ -187,9 +188,9 @@ function sequence3Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 3, 3]);
-			assert.eql(secondCounters, [2, 2, 2, 2]);
-			assert.eql(thirdCounters, [1, 1, 1, 1]);
+			eql(firstCounters, [0, 0, 3, 3]);
+			eql(secondCounters, [2, 2, 2, 2]);
+			eql(thirdCounters, [1, 1, 1, 1]);
 		}
 
 
@@ -198,9 +199,9 @@ function sequence3Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 3, 3]);
-			assert.eql(secondCounters, [3, 3, 2, 3]);
-			assert.eql(thirdCounters, [1, 1, 1, 1]);
+			eql(firstCounters, [0, 0, 3, 3]);
+			eql(secondCounters, [3, 3, 2, 3]);
+			eql(thirdCounters, [1, 1, 1, 1]);
 		}
 
 		, function(){
@@ -208,9 +209,9 @@ function sequence3Runner(interval){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 4, 4]);
-			assert.eql(secondCounters, [3, 3, 3, 3]);
-			assert.eql(thirdCounters, [1, 1, 1, 1]);
+			eql(firstCounters, [0, 0, 4, 4]);
+			eql(secondCounters, [3, 3, 3, 3]);
+			eql(thirdCounters, [1, 1, 1, 1]);
 		}
 
 
@@ -242,8 +243,8 @@ function sequence4Runner(){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 1, 1]);
-			assert.eql(secondCounters, [0, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 1, 1]);
+			eql(secondCounters, [0, 0, 0, 0]);
 		}
 
 		, function(){
@@ -251,13 +252,13 @@ function sequence4Runner(){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 1, 1]);
-			assert.eql(secondCounters, [1, 0, 0, 0]);
+			eql(firstCounters, [0, 0, 1, 1]);
+			eql(secondCounters, [1, 0, 0, 0]);
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 1, 1]);
-			assert.eql(secondCounters, [1, 1, 0, 1]);
+			eql(firstCounters, [0, 0, 1, 1]);
+			eql(secondCounters, [1, 1, 0, 1]);
 		}
 
 		, function(){
@@ -265,8 +266,8 @@ function sequence4Runner(){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 2, 2]);
-			assert.eql(secondCounters, [1, 1, 1, 1]);
+			eql(firstCounters, [0, 0, 2, 2]);
+			eql(secondCounters, [1, 1, 1, 1]);
 		}
 
 		, function(){
@@ -274,13 +275,13 @@ function sequence4Runner(){
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 2, 2]);
-			assert.eql(secondCounters, [2, 1, 1, 1]);
+			eql(firstCounters, [0, 0, 2, 2]);
+			eql(secondCounters, [2, 1, 1, 1]);
 		}
 
 		, function(){
-			assert.eql(firstCounters, [0, 0, 2, 2]);
-			assert.eql(secondCounters, [2, 2, 1, 2]);
+			eql(firstCounters, [0, 0, 2, 2]);
+			eql(secondCounters, [2, 2, 1, 2]);
 		}
 
 
@@ -294,7 +295,7 @@ function sequence4Runner(){
 
 
 
-function sequenceRunner(fns, interval, cb){
+function sequenceRunner(fns, interval){
 	
 	return function(){
 		var fnIndex = 0;
@@ -314,9 +315,6 @@ function sequenceRunner(fns, interval, cb){
 				else{
 					setTimeout(next, interval);
 				}
-			}
-			else{
-				cb && cb();
 			}
 		}//next
 
