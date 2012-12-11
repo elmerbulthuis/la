@@ -16,20 +16,60 @@
 <p id="search">
 </p>
 
+<ul id="found">
+</ul>
 
 <script type="text/javascript">
 	var geocoder = new google.maps.Geocoder();
 
 	var search = la('');
-	
-
-	search.bind(function(err, value){
+	function search_get(err, value){
+		if(err === la.CancelException) return;
 		if(err) throw err;
 
 		var searchElement = document.getElementById('search');
 		while(searchElement.firstChild) searchElement.removeChild(searchElement.firstChild);
 		searchElement.appendChild(document.createTextNode(value));
+	};
+	search.get(search_get);
+	search.on('dirty', function(){
+		search.get(search_get);
 	});
+
+
+	var found = la(search, function(search, cb){
+		geocoder.geocode({
+			address: search	
+		}, function(results, status){
+			cb(null, results)
+		});		
+	});
+	function found_get(err, value){
+		if(err === la.CancelException) return;
+		if(err) throw err;
+
+		var foundElement = document.getElementById('found');
+		while(foundElement.firstChild) foundElement.removeChild(foundElement.firstChild);
+		
+		value
+		&& value
+		.map(function(item){
+			var itemElement = document.createElement('li');
+			itemElement.appendChild(document.createTextNode(item.formatted_address));
+			return itemElement
+		})
+		.forEach(function(element){
+			foundElement.appendChild(element);
+		})
+		;
+	};
+	found.get(found_get);
+	found.on('dirty', function(){
+		found.get(found_get);
+	});
+
+
+
 
 
 
