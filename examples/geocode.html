@@ -9,12 +9,12 @@
 
 <body>
 
-<form>
-<input type="text" name="search" autocomplete="off" />
+<form id="search">
+<input type="text" class="search" autocomplete="off" />
+<input type="text" class="search" autocomplete="off" />
+<input type="text" class="search" autocomplete="off" />
 </form>
 
-<p id="search">
-</p>
 
 <ul id="found">
 </ul>
@@ -29,13 +29,16 @@
 		if(err) throw err;
 
 		var searchElement = document.getElementById('search');
-		while(searchElement.firstChild) searchElement.removeChild(searchElement.firstChild);
-		searchElement.appendChild(document.createTextNode(value));
+		var elements = searchElement.elements;
+		var elementCount = elements.length;
+		for(var elementIndex = 0; elementIndex < elementCount; elementIndex++){
+			var element = elements[elementIndex];
+			element.value = value;
+		}
 	};
-	search.get(search_get);
-	search.on('dirty', function(){
-		search.get(search_get);
-	});
+	search.bind(search_get)
+
+
 
 	var found = la(search, function(search, cb){
 		timeoutHandle = setTimeout(function(){
@@ -68,17 +71,14 @@
 		})
 		;
 	};
-	found.get(found_get);
-	found.on('dirty', function(){
-		found.get(found_get);
-	});
+	found.bind(found_get);
 
 
 
 
 	document.addEventListener('keyup', function(e){
 
-		if(e.target.name == 'search'){
+		if(e.target.className == 'search'){
 			search.set(e.target.value);
 		}
 
