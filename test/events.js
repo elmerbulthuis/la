@@ -79,7 +79,7 @@ function sequence2Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 1, 1]);
-			eql(secondCounters, [0, 0, 0, 0]);
+			eql(secondCounters, [0, 0, 1, 1]);
 		}
 
 		, function(){
@@ -88,7 +88,7 @@ function sequence2Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 1, 1]);
-			eql(secondCounters, [1, 1, 0, 1]);
+			eql(secondCounters, [1, 1, 1, 2]);
 		}
 
 		, function(){
@@ -97,7 +97,7 @@ function sequence2Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 2, 2]);
-			eql(secondCounters, [1, 1, 1, 1]);
+			eql(secondCounters, [1, 1, 2, 2]);
 		}
 
 		, function(){
@@ -106,7 +106,7 @@ function sequence2Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 3, 3]);
-			eql(secondCounters, [1, 1, 1, 1]);
+			eql(secondCounters, [1, 1, 3, 3]);
 		}
 
 		, function(){
@@ -115,7 +115,7 @@ function sequence2Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 3, 3]);
-			eql(secondCounters, [2, 2, 1, 2]);
+			eql(secondCounters, [2, 2, 3, 4]);
 		}
 
 	];
@@ -148,8 +148,8 @@ function sequence3Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 1, 1]);
-			eql(secondCounters, [0, 0, 0, 0]);
-			eql(thirdCounters, [0, 0, 0, 0]);
+			eql(secondCounters, [0, 0, 1, 1]);
+			eql(thirdCounters, [0, 0, 1, 1]);
 		}
 
 		, function(){
@@ -158,8 +158,8 @@ function sequence3Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 1, 1]);
-			eql(secondCounters, [1, 1, 0, 1]);
-			eql(thirdCounters, [0, 0, 0, 0]);
+			eql(secondCounters, [1, 1, 1, 2]);
+			eql(thirdCounters, [0, 0, 1, 1]);
 		}
 
 		, function(){
@@ -168,8 +168,8 @@ function sequence3Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 2, 2]);
-			eql(secondCounters, [1, 1, 1, 1]);
-			eql(thirdCounters, [0, 0, 0, 0]);
+			eql(secondCounters, [1, 1, 2, 2]);
+			eql(thirdCounters, [0, 0, 2, 2]);
 		}
 
 
@@ -179,8 +179,8 @@ function sequence3Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 2, 2]);
-			eql(secondCounters, [2, 2, 1, 2]);
-			eql(thirdCounters, [1, 1, 0, 1]);
+			eql(secondCounters, [2, 2, 2, 3]);
+			eql(thirdCounters, [1, 1, 2, 3]);
 		}
 
 		, function(){
@@ -189,8 +189,8 @@ function sequence3Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 3, 3]);
-			eql(secondCounters, [2, 2, 2, 2]);
-			eql(thirdCounters, [1, 1, 1, 1]);
+			eql(secondCounters, [2, 2, 3, 3]);
+			eql(thirdCounters, [1, 1, 3, 3]);
 		}
 
 
@@ -200,8 +200,8 @@ function sequence3Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 3, 3]);
-			eql(secondCounters, [3, 3, 2, 3]);
-			eql(thirdCounters, [1, 1, 1, 1]);
+			eql(secondCounters, [3, 3, 3, 4]);
+			eql(thirdCounters, [1, 1, 3, 3]);
 		}
 
 		, function(){
@@ -210,8 +210,8 @@ function sequence3Runner(interval){
 
 		, function(){
 			eql(firstCounters, [0, 0, 4, 4]);
-			eql(secondCounters, [3, 3, 3, 3]);
-			eql(thirdCounters, [1, 1, 1, 1]);
+			eql(secondCounters, [3, 3, 4, 4]);
+			eql(thirdCounters, [1, 1, 4, 4]);
 		}
 
 
@@ -244,7 +244,7 @@ function sequence4Runner(){
 
 		, function(){
 			eql(firstCounters, [0, 0, 1, 1]);
-			eql(secondCounters, [0, 0, 0, 0]);
+			eql(secondCounters, [0, 0, 1, 1]);
 		}
 
 		, function(){
@@ -253,12 +253,12 @@ function sequence4Runner(){
 
 		, function(){
 			eql(firstCounters, [0, 0, 1, 1]);
-			eql(secondCounters, [1, 0, 0, 0]);
+			eql(secondCounters, [1, 0, 1, 1]);
 		}
 
 		, function(){
 			eql(firstCounters, [0, 0, 1, 1]);
-			eql(secondCounters, [1, 1, 0, 1]);
+			eql(secondCounters, [1, 1, 1, 2]);
 		}
 
 		, function(){
@@ -267,7 +267,7 @@ function sequence4Runner(){
 
 		, function(){
 			eql(firstCounters, [0, 0, 2, 2]);
-			eql(secondCounters, [1, 1, 1, 1]);
+			eql(secondCounters, [1, 1, 2, 2]);
 		}
 
 		, function(){
@@ -276,12 +276,12 @@ function sequence4Runner(){
 
 		, function(){
 			eql(firstCounters, [0, 0, 2, 2]);
-			eql(secondCounters, [2, 1, 1, 1]);
+			eql(secondCounters, [2, 1, 2, 2]);
 		}
 
 		, function(){
 			eql(firstCounters, [0, 0, 2, 2]);
-			eql(secondCounters, [2, 2, 1, 2]);
+			eql(secondCounters, [2, 2, 2, 3]);
 		}
 
 
