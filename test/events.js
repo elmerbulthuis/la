@@ -1,16 +1,18 @@
 var la = require('la');
 var assert = require('assert');
 
-module.exports['sequence1'] = sequenceRunner(getSequence1(), -1);
-module.exports['sequence1i'] = sequenceRunner(getSequence1(), 10);
-module.exports['sequence2'] = sequenceRunner(getSequence2(), -1);
-module.exports['sequence2i'] = sequenceRunner(getSequence2(), 10);
-module.exports['sequence3'] = sequenceRunner(getSequence3(), -1);
-module.exports['sequence3i'] = sequenceRunner(getSequence3(), 10);
+module.exports['sequence1'] = sequence1Runner(-1);
+module.exports['sequence1i'] = sequence1Runner(10);
+module.exports['sequence2'] = sequence2Runner(-1);
+module.exports['sequence2i'] = sequence2Runner(10);
+module.exports['sequence3'] = sequence3Runner(-1);
+module.exports['sequence3i'] = sequence3Runner(10);
+
+module.exports['sequence4'] = sequence4Runner();
 
 
 
-function getSequence1(){
+function sequence1Runner(interval){
 	var firstLa = la(1);
 	var firstCounters = getCounters(firstLa);
 
@@ -54,12 +56,12 @@ function getSequence1(){
 
 	];
 
-	return sequence;
-}//getSequence1
+	return sequenceRunner(sequence, interval);
+}//sequence1Runner
 
 
 
-function getSequence2(){
+function sequence2Runner(interval){
 	var firstLa = la(1);
 	var firstCounters = getCounters(firstLa);
 
@@ -117,13 +119,13 @@ function getSequence2(){
 
 	];
 
-	return sequence;
-}//getSequence2
+	return sequenceRunner(sequence, interval);
+}//sequence2Runner
 
 
 
 
-function getSequence3(){
+function sequence3Runner(interval){
 	var firstLa = la(1);
 	var firstCounters = getCounters(firstLa);
 
@@ -214,14 +216,87 @@ function getSequence3(){
 
 	];
 
-	return sequence;
-}//getSequence3
+	return sequenceRunner(sequence, interval);
+}//sequence3Runner
+
+
+
+
+
+function sequence4Runner(){
+	var firstLa = la(1);
+	var firstCounters = getCounters(firstLa);
+
+	var secondLa = la(firstLa, function(firstValue, cb){
+		setTimeout(function(){
+			cb(null, firstValue + firstValue);
+		}, 50)
+	});
+	var secondCounters = getCounters(secondLa);
+
+
+	var sequence = [
+
+		function(){
+			firstLa.set(2);
+		}
+
+		, function(){
+			assert.eql(firstCounters, [0, 0, 1, 1]);
+			assert.eql(secondCounters, [0, 0, 0, 0]);
+		}
+
+		, function(){
+			secondLa.get(av(4));
+		}
+
+		, function(){
+			assert.eql(firstCounters, [0, 0, 1, 1]);
+			assert.eql(secondCounters, [1, 0, 0, 0]);
+		}
+
+		, function(){
+			assert.eql(firstCounters, [0, 0, 1, 1]);
+			assert.eql(secondCounters, [1, 1, 0, 1]);
+		}
+
+		, function(){
+			firstLa.set(3);
+		}
+
+		, function(){
+			assert.eql(firstCounters, [0, 0, 2, 2]);
+			assert.eql(secondCounters, [1, 1, 1, 1]);
+		}
+
+		, function(){
+			secondLa.get(av(6));
+		}
+
+		, function(){
+			assert.eql(firstCounters, [0, 0, 2, 2]);
+			assert.eql(secondCounters, [2, 1, 1, 1]);
+		}
+
+		, function(){
+			assert.eql(firstCounters, [0, 0, 2, 2]);
+			assert.eql(secondCounters, [2, 2, 1, 2]);
+		}
+
+
+	];
+
+	return sequenceRunner(sequence, 30);
+
+}//sequence4Runner
+
+
 
 
 
 function sequenceRunner(fns, interval, cb){
 	
-	return function(beforeExit, assert){
+	return function(){
 		var fnIndex = 0;
 		var fnCount = fns.length;
 
