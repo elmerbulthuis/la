@@ -15,7 +15,6 @@
 <input type="text" class="search" autocomplete="off" />
 </form>
 
-
 <ul id="found">
 </ul>
 
@@ -23,8 +22,8 @@
 	var geocoder = new google.maps.Geocoder();
 	var timeoutHandle = 0;
 
-	var search = la('');
-	function search_get(err, value){
+	var search = la(decodeURIComponent((location.hash || '#').substring(1)));
+	search.bind(function(err, value){
 		if(err === la.CancelException) return;
 		if(err) throw err;
 
@@ -35,10 +34,11 @@
 			var element = elements[elementIndex];
 			element.value = value;
 		}
-	};
-	search.bind(search_get)
-
-
+	});
+	search.bind(function(err, value){
+		if(err) console.log(err);
+		location.replace('#' + encodeURIComponent(value));
+	});
 
 	var found = la(search, function(search, cb){
 		timeoutHandle = setTimeout(function(){
@@ -49,11 +49,11 @@
 			});		
 		}, 1000);
 	});
-	function found_get(err, value){
-		if(err === la.CancelException) {
-			clearTimeout(timeoutHandle);
-			return;
-		}
+	found.bind(function(err, value){
+		clearTimeout(timeoutHandle);
+	});
+	found.bind(function(err, value){
+		if(err === la.CancelException) return;
 		if(err) throw err;
 
 		var foundElement = document.getElementById('found');
@@ -70,21 +70,14 @@
 			foundElement.appendChild(element);
 		})
 		;
-	};
-	found.bind(found_get);
-
-
-
+	});
 
 	document.addEventListener('keyup', function(e){
-
 		if(e.target.className == 'search'){
 			search.set(e.target.value);
 		}
-
 	}, false);
 	
-
 </script>
 
 
