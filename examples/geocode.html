@@ -21,6 +21,7 @@
 
 <script type="text/javascript">
 	var geocoder = new google.maps.Geocoder();
+	var timeoutHandle = 0;
 
 	var search = la('');
 	function search_get(err, value){
@@ -36,16 +37,20 @@
 		search.get(search_get);
 	});
 
-
 	var found = la(search, function(search, cb){
-		geocoder.geocode({
-			address: search	
-		}, function(results, status){
-			cb(null, results)
-		});		
+		timeoutHandle = setTimeout(function(){
+			geocoder.geocode({
+				address: search	
+			}, function(results, status){
+				cb(null, results)
+			});		
+		}, 1000);
 	});
 	function found_get(err, value){
-		if(err === la.CancelException) return;
+		if(err === la.CancelException) {
+			clearTimeout(timeoutHandle);
+			return;
+		}
 		if(err) throw err;
 
 		var foundElement = document.getElementById('found');
