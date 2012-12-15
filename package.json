@@ -1,7 +1,7 @@
 {
     "name":	"la"
     , "description":	"lazy and async"
-    , "version":	"0.4.1"
+    , "version":	"0.4.2"
 
     , "author":	"Elmer Bulthuis <elmerbulthuis@gmail.com>"
 
@@ -12,7 +12,7 @@
         }
     ]
 
-    , "main": "index.js"
+    , "main": "lib/la.js"
     , "scripts": {
         "test": "expresso test/*"
     }
