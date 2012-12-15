@@ -1,12 +1,16 @@
 {
     "name":	"la"
-    , "description":	"lazy-async loader"
-    , "version":	"0.4.0"
+    , "description":	"lazy and async"
+    , "version":	"0.4.1"
+
     , "author":	"Elmer Bulthuis <elmerbulthuis@gmail.com>"
-    , "repositories":	[{
-        "type": "git",
-        "url": "git@github.com:elmerbulthuis/la.git"
-    }]
+
+    , "repositories":	[
+        {
+            "type": "git",
+            "url": "git@github.com:elmerbulthuis/la.git"
+        }
+    ]
 
     , "main": "index.js"
     , "scripts": {
@@ -17,6 +21,12 @@
 	}
     ,   "devDependencies":	{
         "expresso": "*"
+        , "jamjs": "*"
 	}
+
+    , "jam": {
+        "dependencies": {
+        }
+    }
 
 }
