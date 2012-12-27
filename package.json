@@ -15,6 +15,8 @@
     , "main": "lib/la.js"
     , "scripts": {
         "test": "expresso test/*"
+        , "install": "jam install"
+        , "update": "jam upgrade"
     }
     
     ,   "dependencies":	{
@@ -26,6 +28,7 @@
 
     , "jam": {
         "dependencies": {
+            "events": "*"
         }
     }
 

@@ -1,18 +1,18 @@
-var la = require('la');
+var ValueFuture = require('../lib/ValueFuture');
+var DependencyFuture = require('../lib/DependencyFuture');
 
 
 
 module.exports['sum async'] = function(beforeExit, assert){
-	var one = la(1);
-	var two = la(2);
-	var sum = la(one, two, function(one, two, cb){
+	var one = new ValueFuture(1);
+	var two = new ValueFuture(2);
+	var sum = new DependencyFuture(one, two, function(one, two, cb){
 		setTimeout(function(){
 			cb(null, one + two);
 		}, 1000);
 	});
 
-	sum.get(function(err, value){
-		assert.ifError(err);
+	sum.get(function(value){
 		assert.equal(value, 3);
 	});
 
@@ -21,34 +21,33 @@ module.exports['sum async'] = function(beforeExit, assert){
 
 
 module.exports['sum async 2'] = function(beforeExit, assert){
-	var one = la(1);
-	var two = la(2);
+	var one = new ValueFuture(1);
+	var two = new ValueFuture(2);
 
 	var countOne = 0;
 	var countTwo = 0;
 	var countSum = 0;
 	
-	one = la(one, function(one, cb){
+	one = new DependencyFuture(one, function(one, cb){
 		countOne++;
 		setTimeout(function(){
 			cb(null, one);
 		}, 1000);
 	});
-	two = la(two, function(two, cb){
+	two = new DependencyFuture(two, function(two, cb){
 		countTwo++;
 		setTimeout(function(){
 			cb(null, two);
 		}, 1000);
 	});
-	var sum = la(one, two, function(one, two, cb){
+	var sum = new DependencyFuture(one, two, function(one, two, cb){
 		countSum++;
 		setTimeout(function(){
 			cb(null, one + two);
 		}, 1000);
 	});
 
-	sum.get(function(err, value){
-		assert.ifError(err);
+	sum.get(function(value){
 		assert.equal(value, 3);
 	});
 
