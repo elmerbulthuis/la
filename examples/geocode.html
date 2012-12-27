@@ -43,7 +43,7 @@ require(['lib/la'], function(la){
 		location.replace('#' + encodeURIComponent(value));
 	});
 
-	var found = new la.DependencyFuture(search, function(search, cb){
+	var found = new la.LazyFuture(search, function(search, cb){
 		return setTimeout(function(){
 			geocoder.geocode({
 				address: search	

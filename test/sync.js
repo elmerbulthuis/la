@@ -1,12 +1,12 @@
 var ValueFuture = require('../lib/ValueFuture');
-var DependencyFuture = require('../lib/DependencyFuture');
+var LazyFuture = require('../lib/LazyFuture');
 
 
 
 module.exports['sum sync'] = function(beforeExit, assert){
 	var one = new ValueFuture(1);
 	var two = new ValueFuture(2);
-	var sum = new DependencyFuture(one, two, function(one, two, cb){
+	var sum = new LazyFuture(one, two, function(one, two, cb){
 		cb(one + two);
 	});
 
@@ -20,7 +20,7 @@ module.exports['sum sync'] = function(beforeExit, assert){
 module.exports['sum sync 2'] = function(beforeExit, assert){
 	var one = new ValueFuture(1);
 	var two = new ValueFuture(2);
-	var sum = new DependencyFuture(one, two, function(one, two, cb){
+	var sum = new LazyFuture(one, two, function(one, two, cb){
 		cb(one + two);
 	});
 
@@ -51,15 +51,15 @@ module.exports['sum sync 3'] = function(beforeExit, assert){
 	var countSecond = 0;
 	var countThird = 0;
 	
-	var firstDependency = new DependencyFuture(firstValue, function(first, cb){
+	var firstDependency = new LazyFuture(firstValue, function(first, cb){
 		countFirst++;
 		cb(first);
 	});
-	var secondDependency = new DependencyFuture(secondValue, function(second, cb){
+	var secondDependency = new LazyFuture(secondValue, function(second, cb){
 		countSecond++;
 		cb(second);
 	});
-	var thirdDependency = new DependencyFuture(firstDependency, secondDependency, function(first, second, cb){
+	var thirdDependency = new LazyFuture(firstDependency, secondDependency, function(first, second, cb){
 		countThird++;
 		cb(first + second);
 	});

@@ -1,12 +1,12 @@
 var ValueFuture = require('../lib/ValueFuture');
-var DependencyFuture = require('../lib/DependencyFuture');
+var LazyFuture = require('../lib/LazyFuture');
 
 
 module.exports['cancel'] = function(beforeExit, assert){
 	var countCancel = 0;
 	var countGet = 0;
 	var firstLa = new ValueFuture(1);
-	var secondLa = new DependencyFuture(firstLa, function(firstValue, cb){
+	var secondLa = new LazyFuture(firstLa, function(firstValue, cb){
 		return setTimeout(function(){
 			cb(firstValue + firstValue);
 		}, 50);

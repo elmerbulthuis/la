@@ -1,11 +1,11 @@
 var ValueFuture = require('../lib/ValueFuture');
-var DependencyFuture = require('../lib/DependencyFuture');
+var LazyFuture = require('../lib/LazyFuture');
 
 
 module.exports['countGet'] = function(beforeExit, assert){
 	var count = 0;
 	var firstLa = new ValueFuture(1);
-	var secondLa = new DependencyFuture(firstLa, function(firstValue, cb){
+	var secondLa = new LazyFuture(firstLa, function(firstValue, cb){
 		setTimeout(function(){
 			cb(firstValue + firstValue);
 		}, 50)
