@@ -52,9 +52,10 @@ require(['lib/la'], function(la){
 			});		
 		}, 1000);
 	});
-	found.bind(function(value){
+	found.on('cancel', function(){
 		clearTimeout(timeoutHandle);
 	});
+
 	found.bind(function(value){
 		var foundElement = document.getElementById('found');
 		while(foundElement.firstChild) foundElement.removeChild(foundElement.firstChild);
