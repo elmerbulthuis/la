@@ -1,11 +1,13 @@
-var la = require('la');
+var ValueFuture = require('../lib/ValueFuture');
+var DependencyFuture = require('../lib/DependencyFuture');
+
 
 module.exports['countGet'] = function(beforeExit, assert){
 	var count = 0;
-	var firstLa = la(1);
-	var secondLa = la(firstLa, function(firstValue, cb){
+	var firstLa = new ValueFuture(1);
+	var secondLa = new DependencyFuture(firstLa, function(firstValue, cb){
 		setTimeout(function(){
-			cb(null, firstValue + firstValue);
+			cb(firstValue + firstValue);
 		}, 50)
 	});
 
@@ -36,9 +38,8 @@ module.exports['countGet'] = function(beforeExit, assert){
 	});
 
 	function av(expect){
-		return function(err, actual){
+		return function(actual){
 			count++;
-			assert.isNull(err);
 			assert.equal(expect, actual);
 		};
 	}
