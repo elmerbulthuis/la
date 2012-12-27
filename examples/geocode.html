@@ -28,7 +28,6 @@ require.config({
 require(['lib/la'], function(la){
 
 	var geocoder = new google.maps.Geocoder();
-	var timeoutHandle = 0;
 
 	var search = new la.ValueFuture(decodeURIComponent((location.hash || '#').substring(1)));
 	search.bind(function(value){
@@ -45,16 +44,14 @@ require(['lib/la'], function(la){
 	});
 
 	var found = new la.DependencyFuture(search, function(search, cb){
-		timeoutHandle = setTimeout(function(){
+		return setTimeout(function(){
 			geocoder.geocode({
 				address: search	
 			}, function(results, status){
 				cb(null, results)
 			});		
 		}, 1000);
-	});
-	found.on('cancel', function(){
-		console.log('cancel');
+	}, function(timeoutHandle){
 		clearTimeout(timeoutHandle);
 	});
 
