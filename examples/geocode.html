@@ -3,7 +3,7 @@
 <head>
 
 <title>geocode</title>
-<script type="text/javascript" src="../lib/la.js"></script>
+<script type="text/javascript" src="../jam/require.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 </head>
@@ -20,14 +20,17 @@
 </ul>
 
 <script type="text/javascript">
+require.config({
+	baseUrl: ".."
+});
+
+require(['lib/la'], function(la){
+
 	var geocoder = new google.maps.Geocoder();
 	var timeoutHandle = 0;
 
-	var search = la(decodeURIComponent((location.hash || '#').substring(1)));
-	search.bind(function(err, value){
-		if(err === la.CancelException) return;
-		if(err) throw err;
-
+	var search = new la.ValueFuture(decodeURIComponent((location.hash || '#').substring(1)));
+	search.bind(function(value){
 		var searchElement = document.getElementById('search');
 		var elements = searchElement.elements;
 		var elementCount = elements.length;
@@ -36,27 +39,23 @@
 			element.value = value;
 		}
 	});
-	search.bind(function(err, value){
-		if(err) console.log(err);
+	search.bind(function(value){
 		location.replace('#' + encodeURIComponent(value));
 	});
 
-	var found = la(search, function(search, cb){
+	var found = new la.DependencyFuture(search, function(search, cb){
 		timeoutHandle = setTimeout(function(){
 			geocoder.geocode({
 				address: search	
 			}, function(results, status){
-				cb(null, results)
+				cb(results)
 			});		
 		}, 1000);
 	});
-	found.bind(function(err, value){
+	found.bind(function(value){
 		clearTimeout(timeoutHandle);
 	});
-	found.bind(function(err, value){
-		if(err === la.CancelException) return;
-		if(err) throw err;
-
+	found.bind(function(value){
 		var foundElement = document.getElementById('found');
 		while(foundElement.firstChild) foundElement.removeChild(foundElement.firstChild);
 		
@@ -78,7 +77,8 @@
 			search.set(e.target.value);
 		}
 	}, false);
-	
+
+});
 </script>
 
 
