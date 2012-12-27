@@ -53,6 +53,7 @@ require(['lib/la'], function(la){
 		}, 1000);
 	});
 	found.on('cancel', function(){
+		console.log('cancel');
 		clearTimeout(timeoutHandle);
 	});
 
@@ -77,6 +78,10 @@ require(['lib/la'], function(la){
 		if(e.target.className == 'search'){
 			search.set(e.target.value);
 		}
+	}, false);
+
+	window.addEventListener('hashchange', function(e){
+		search.set(decodeURIComponent((location.hash || '#').substring(1)));
 	}, false);
 
 });
