@@ -17,6 +17,20 @@ module.exports['sum sync'] = function(beforeExit, assert){
 }
 
 
+module.exports['sum sync alt'] = function(beforeExit, assert){
+	var one = new ValueFuture(1);
+	var two = new ValueFuture(2);
+	var sum = new DependencyFuture([one, two], function(futures, cb){
+		cb(futures[0] + futures[1]);
+	});
+
+	sum.get(function(value){
+		assert.equal(value, 3);
+	});
+
+}
+
+
 module.exports['sum sync 2'] = function(beforeExit, assert){
 	var one = new ValueFuture(1);
 	var two = new ValueFuture(2);
