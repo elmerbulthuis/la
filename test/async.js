@@ -8,7 +8,7 @@ module.exports['sum async'] = function(beforeExit, assert){
 	var two = new ValueFuture(2);
 	var sum = new DependencyFuture(one, two, function(one, two, cb){
 		setTimeout(function(){
-			cb(one + two);
+			cb(null, one + two);
 		}, 1000);
 	});
 
@@ -31,19 +31,19 @@ module.exports['sum async 2'] = function(beforeExit, assert){
 	one = new DependencyFuture(one, function(one, cb){
 		countOne++;
 		setTimeout(function(){
-			cb(one);
+			cb(null, one);
 		}, 1000);
 	});
 	two = new DependencyFuture(two, function(two, cb){
 		countTwo++;
 		setTimeout(function(){
-			cb(two);
+			cb(null, two);
 		}, 1000);
 	});
 	var sum = new DependencyFuture(one, two, function(one, two, cb){
 		countSum++;
 		setTimeout(function(){
-			cb(one + two);
+			cb(null, one + two);
 		}, 1000);
 	});
 

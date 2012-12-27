@@ -48,7 +48,7 @@ require(['lib/la'], function(la){
 			geocoder.geocode({
 				address: search	
 			}, function(results, status){
-				cb(results)
+				cb(null, results)
 			});		
 		}, 1000);
 	});
