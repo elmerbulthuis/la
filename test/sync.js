@@ -20,7 +20,7 @@ module.exports['sum sync'] = function(beforeExit, assert){
 module.exports['sum sync alt'] = function(beforeExit, assert){
 	var one = new ValueFuture(1);
 	var two = new ValueFuture(2);
-	var sum = new DependencyFuture([one, two], function(futures, cb){
+	var sum = new LazyFuture([one, two], function(futures, cb){
 		cb(futures[0] + futures[1]);
 	});
 
