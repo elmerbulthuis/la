@@ -3,4 +3,6 @@
 *~
 *.log
 node_modules/
-
+jam/
+test/
+examples/
