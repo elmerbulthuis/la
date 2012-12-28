@@ -53,7 +53,7 @@ require(['lib/la'], function(la){
 		}, 1000);
 	}, function(timeoutHandle){
 		clearTimeout(timeoutHandle);
-	});
+	}, true);
 
 	found.bind(function(value){
 		var foundElement = document.getElementById('found');

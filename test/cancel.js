@@ -12,7 +12,7 @@ module.exports['cancel'] = function(beforeExit, assert){
 		}, 50);
 	}, function(loadResult){
 		clearTimeout(loadResult);
-	});
+	}, true);
 
 	secondLa.on('cancel', function(){
 		countCancel++;

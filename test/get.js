@@ -9,7 +9,7 @@ module.exports['countGet'] = function(beforeExit, assert){
 		setTimeout(function(){
 			cb(firstValue + firstValue);
 		}, 50)
-	});
+	}, true);
 
 
 	var sequence = [

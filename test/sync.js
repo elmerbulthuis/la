@@ -36,7 +36,7 @@ module.exports['sum sync 2'] = function(beforeExit, assert){
 	var two = new ValueFuture(2);
 	var sum = new LazyFuture(one, two, function(one, two, cb){
 		cb(one + two);
-	});
+	}, true);
 
 	sum.get(function(value){
 		assert.equal(value, 3);
@@ -68,15 +68,15 @@ module.exports['sum sync 3'] = function(beforeExit, assert){
 	var firstDependency = new LazyFuture(firstValue, function(first, cb){
 		countFirst++;
 		cb(first);
-	});
+	}, true);
 	var secondDependency = new LazyFuture(secondValue, function(second, cb){
 		countSecond++;
 		cb(second);
-	});
+	}, true);
 	var thirdDependency = new LazyFuture(firstDependency, secondDependency, function(first, second, cb){
 		countThird++;
 		cb(first + second);
-	});
+	}, true);
 
 	thirdDependency.get(function(value){
 		assert.equal(value, 3);
