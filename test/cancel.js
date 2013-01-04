@@ -44,7 +44,7 @@ module.exports['cancel'] = function(beforeExit, assert){
 		assert.equal(countGet, 2);
 	});
 
-	function err(){
+	function err(value){
 		throw 'err';
 	}
 	function av(expect){
