@@ -7,10 +7,10 @@ module.exports['sum sync'] = function(beforeExit, assert){
 	var one = new ValueFuture(1);
 	var two = new ValueFuture(2);
 	var sum = new LazyFuture(one, two, function(one, two, cb){
-		cb(one + two);
+		cb(null, one + two);
 	});
 
-	sum.get(function(value){
+	sum.get(function(err, value){
 		assert.equal(value, 3);
 	});
 
@@ -24,7 +24,7 @@ module.exports['sum sync alt'] = function(beforeExit, assert){
 		cb(futures[0] + futures[1]);
 	});
 
-	sum.get(function(value){
+	sum.get(function(err, value){
 		assert.equal(value, 3);
 	});
 
@@ -35,16 +35,16 @@ module.exports['sum sync 2'] = function(beforeExit, assert){
 	var one = new ValueFuture(1);
 	var two = new ValueFuture(2);
 	var sum = new LazyFuture(one, two, function(one, two, cb){
-		cb(one + two);
+		cb(null, one + two);
 	}, true);
 
-	sum.get(function(value){
+	sum.get(function(err, value){
 		assert.equal(value, 3);
 	});
 
 	one.set(3)
 
-	sum.get(function(value){
+	sum.get(function(err, value){
 		assert.equal(value, 5);
 	});
 
@@ -67,18 +67,18 @@ module.exports['sum sync 3'] = function(beforeExit, assert){
 	
 	var firstDependency = new LazyFuture(firstValue, function(first, cb){
 		countFirst++;
-		cb(first);
+		cb(null, first);
 	}, true);
 	var secondDependency = new LazyFuture(secondValue, function(second, cb){
 		countSecond++;
-		cb(second);
+		cb(null, second);
 	}, true);
 	var thirdDependency = new LazyFuture(firstDependency, secondDependency, function(first, second, cb){
 		countThird++;
-		cb(first + second);
+		cb(null, first + second);
 	}, true);
 
-	thirdDependency.get(function(value){
+	thirdDependency.get(function(err, value){
 		assert.equal(value, 3);
 	});
 	assert.equal(countFirst, 1);
@@ -87,7 +87,7 @@ module.exports['sum sync 3'] = function(beforeExit, assert){
 
 
 	firstValue.set(3);
-	thirdDependency.get(function(value){
+	thirdDependency.get(function(err, value){
 		assert.equal(value, 5);
 	});
 	assert.equal(countFirst, 2);
@@ -96,7 +96,7 @@ module.exports['sum sync 3'] = function(beforeExit, assert){
 
 
 	secondValue.set(5);
-	thirdDependency.get(function(value){
+	thirdDependency.get(function(err, value){
 		assert.equal(value, 8);
 	});
 	assert.equal(countFirst, 2);
@@ -105,7 +105,7 @@ module.exports['sum sync 3'] = function(beforeExit, assert){
 
 
 	secondValue.set(5);
-	thirdDependency.get(function(value){
+	thirdDependency.get(function(err, value){
 		assert.equal(value, 8);
 	});
 	assert.equal(countFirst, 2);
@@ -114,7 +114,7 @@ module.exports['sum sync 3'] = function(beforeExit, assert){
 
 	
 	secondValue.set(7);
-	thirdDependency.get(function(value){
+	thirdDependency.get(function(err, value){
 		assert.equal(value, 10);
 	});
 	assert.equal(countFirst, 2);

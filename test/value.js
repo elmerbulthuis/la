@@ -5,7 +5,7 @@ var ValueFuture = require('../lib/ValueFuture');
 module.exports['one'] = function(beforeExit, assert){
 	var one = new ValueFuture(1);
 
-	one.get(function(value){
+	one.get(function(err, value){
 		assert.equal(value, 1);
 	});
 }
@@ -16,13 +16,13 @@ module.exports['one'] = function(beforeExit, assert){
 module.exports['two'] = function(beforeExit, assert){
 	var two = new ValueFuture(2);
 
-	two.get(function(value){
+	two.get(function(err, value){
 		assert.equal(value, 2);
 	});
 
 	two.set(4);
 
-	two.get(function(value){
+	two.get(function(err, value){
 		assert.equal(value, 4);
 	});
 }

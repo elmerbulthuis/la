@@ -7,7 +7,7 @@ module.exports['error event'] = function(beforeExit, assert){
 	var firstLa = new ValueFuture(1);
 	var secondLa = new LazyFuture(firstLa, function(firstValue, cb){
 		setTimeout(function(){
-			cb('error!', firstLa);
+			cb('error!', firstValue);
 		}, 10);
 	}, true);
 
@@ -21,14 +21,14 @@ module.exports['error event'] = function(beforeExit, assert){
 		assert.equal('error!', err)
 	});
 
-	secondLa.get(function(value){
-		counter++;
+	secondLa.get(function(err, value){
+		assert.equal(value, 1);
 	});
-	secondLa.get(function(value){
-		counter++;
+	secondLa.get(function(err, value){
+		assert.equal(value, 1);
 	});
-	secondLa.get(function(value){
-		counter++;
+	secondLa.get(function(err, value){
+		assert.equal(value, 1);
 	});
 
 };
