@@ -12,7 +12,7 @@ module.exports['sum async'] = function(beforeExit, assert){
 		}, 1000);
 	});
 
-	sum.get(function(value){
+	sum.get(function(err, value){
 		assert.equal(value, 3);
 	});
 
@@ -47,7 +47,7 @@ module.exports['sum async 2'] = function(beforeExit, assert){
 		}, 1000);
 	});
 
-	sum.get(function(value){
+	sum.get(function(err, value){
 		assert.equal(value, 3);
 	});
 

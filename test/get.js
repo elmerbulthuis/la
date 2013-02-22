@@ -7,7 +7,7 @@ module.exports['countGet'] = function(beforeExit, assert){
 	var firstLa = new ValueFuture(1);
 	var secondLa = new LazyFuture(firstLa, function(firstValue, cb){
 		setTimeout(function(){
-			cb(firstValue + firstValue);
+			cb(null, firstValue + firstValue);
 		}, 50)
 	}, true);
 
@@ -38,7 +38,9 @@ module.exports['countGet'] = function(beforeExit, assert){
 	});
 
 	function av(expect){
-		return function(actual){
+		return function(err, actual){
+			if(err) throw err;
+
 			count++;
 			assert.equal(expect, actual);
 		};

@@ -8,7 +8,7 @@ module.exports['cancel'] = function(beforeExit, assert){
 	var firstLa = new ValueFuture(1);
 	var secondLa = new LazyFuture(firstLa, function(firstValue, cb){
 		return setTimeout(function(){
-			cb(firstValue + firstValue);
+			cb(null, firstValue + firstValue);
 		}, 50);
 	}, function(loadResult){
 		clearTimeout(loadResult);
@@ -44,11 +44,13 @@ module.exports['cancel'] = function(beforeExit, assert){
 		assert.equal(countGet, 2);
 	});
 
-	function err(value){
+	function err(err, value){
 		throw 'err';
 	}
 	function av(expect){
-		return function(actual){
+		return function(err, actual){
+			if(err) throw err;
+
 			countGet++;
 			assert.equal(expect, actual);
 		};
