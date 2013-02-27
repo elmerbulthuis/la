@@ -30,7 +30,7 @@ require(['lib/la'], function(la){
 	var geocoder = new google.maps.Geocoder();
 
 	var search = new la.ValueFuture(decodeURIComponent((location.hash || '#').substring(1)));
-	search.bind(function(value){
+	search.bind(function(err, value){
 		var searchElement = document.getElementById('search');
 		var elements = searchElement.elements;
 		var elementCount = elements.length;
@@ -39,7 +39,7 @@ require(['lib/la'], function(la){
 			element.value = value;
 		}
 	});
-	search.bind(function(value){
+	search.bind(function(err, value){
 		location.replace('#' + encodeURIComponent(value));
 	});
 
@@ -55,7 +55,7 @@ require(['lib/la'], function(la){
 		clearTimeout(timeoutHandle);
 	}, true);
 
-	found.bind(function(value){
+	found.bind(function(err, value){
 		var foundElement = document.getElementById('found');
 		while(foundElement.firstChild) foundElement.removeChild(foundElement.firstChild);
 		
